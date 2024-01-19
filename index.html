@@ -1,0 +1,36 @@
+  <!DOCTYPE html>
+<html>
+<title> selamat datang di profil github by.sopian munawar </title><head>
+    <style>
+    </style>
+    <script>
+        function submit() {
+            var username = document.getElementById('username').value;
+            var link = "https://api.github.com/users/" + username;
+            var JSONtext = '';
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                JSONtext = this.responseText;
+                const JSONobject = JSON.parse(JSONtext);
+                //document.getElementById("userInfo").innerHTML = this.responseText;
+                document.getElementById("userID").innerHTML = JSONobject.login;
+                document.getElementById("userPhoto").src = JSONobject.avatar_url;                document.getElementById("userCompany").innerHTML = JSONobject.company;                document.getElementById("userLocation").innerHTML = JSONobject.location;
+                document.getElementById("userBio").innerHTML = JSONobject.bio;
+                document.getElementById("userUpdated_at").innerHTML = JSONobject.updated_at;
+                document.getElementById("userCreated_at").innerHTML = JSONobject.created_at;
+            }
+            xhttp.open("GET", link);
+            xhttp.send();
+        }
+    </script>
+    <input id="username" />
+    <button type="button" id="submit" onclick="submit()">Submit</button>
+    <p><label id="userID"></label></p>
+    <img id="userPhoto">
+    <p>company: <label id="userCompany"></label></p>    
+<p>location: <label id="userLocation"></label></p>
+    <p>bio: <label id="userBio"></label></p>
+    <p>updated_at: <label id="userUpdated_at"></label></p>
+    <p>created_at: <label id="userCreated_at"></label></p>
+    </body>
+</html>
